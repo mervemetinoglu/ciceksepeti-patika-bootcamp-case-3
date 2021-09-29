@@ -1,0 +1,16 @@
+.star__container {
+  display: flex;
+  align-items: center;
+  margin-top: 4px;
+
+  input[type="radio"] {
+    display: none;
+  }
+}
+
+.star__item {
+  height: 1.2rem;
+  margin-left: 3px;
+  cursor: pointer;
+  transition: color 200ms;
+}

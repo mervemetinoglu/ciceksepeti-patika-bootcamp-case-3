@@ -1,0 +1,131 @@
+$card-color: rgba(238, 238, 238, 0.822);
+
+.card {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(13rem, 1fr));
+  column-gap: 3rem;
+  row-gap: 3.5rem;
+  margin: 3rem 0;
+  padding: 0 2rem;
+}
+
+.card__item {
+  position: relative;
+  height: 24em;
+  cursor: pointer;
+  transform: perspective(1000px) rotateY(10deg);
+  transition: 0.5s;
+  box-shadow: 7px 0 11px -4px rgba(0, 0, 0, 0.699);
+
+  &:hover {
+    transform: perspective(1000px) rotateY(0);
+  }
+
+  &:hover &-img {
+    &::after {
+      transform: translateY(0%);
+    }
+  }
+
+  &:hover .card__buttons {
+    width: 10rem;
+    height: 10rem;
+  }
+}
+
+.card__item-img {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  overflow: hidden;
+  border-radius: 5px;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  &::after {
+    display: block;
+    content: "";
+    position: absolute;
+    z-index: 100;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 120%;
+    background: linear-gradient(
+      226deg,
+      rgba(255, 255, 255, 0.4) 0%,
+      rgba(255, 255, 255, 0.247) 35%,
+      rgba(255, 255, 255, 0.2) 42%,
+      rgba(255, 255, 255, 0) 60%
+    );
+    transform: translateY(-20%);
+    transition: transform 0.65s cubic-bezier(0.18, 0.9, 0.58, 1);
+  }
+}
+
+.card__item-body {
+  position: absolute;
+  height: 7em;
+  width: 13em;
+  bottom: 0;
+  left: -2em;
+  padding: 0.2rem 0.7rem;
+  background-color: rgba(51, 51, 51, 0.979);
+  border-top-right-radius: 10px;
+  color: $card-color;
+  overflow: hidden;
+  z-index: 200;
+
+  h2 {
+    font-size: 1rem;
+  }
+  span {
+    font-size: 0.9rem;
+  }
+}
+
+.card__buttons {
+  position: absolute;
+  top: 1.5rem;
+  left: 1.25rem;
+  width: 0;
+  height: 0;
+  transform: translate(-50%, -50%);
+  transition: 0.25s cubic-bezier(0.25, 0, 0, 1);
+
+  button {
+    display: grid;
+    place-items: center;
+    position: absolute;
+    width: 2rem;
+    height: 2rem;
+    border: none;
+    border-radius: 50%;
+    background: $card-color;
+    color: #000;
+    transform: translate(-50%, -50%);
+    transition: 0.25s cubic-bezier(0.25, 0, 0, 1);
+    cursor: pointer;
+
+    &:hover {
+      background: #000;
+      color: $card-color;
+    }
+
+    &:first-child:nth-last-child(2),
+    &:first-child:nth-last-child(2) ~ * {
+      &:nth-child(1) {
+        left: 37.5%;
+        top: 18.75%;
+      }
+      &:nth-child(2) {
+        left: 18.75%;
+        top: 37.5%;
+      }
+    }
+  }
+}
