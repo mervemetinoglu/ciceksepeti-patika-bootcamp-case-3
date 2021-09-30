@@ -11,6 +11,7 @@ class App extends React.Component {
       posts: [],
       filteredPosts: [],
       inputValue: "",
+      isLoading: false,
     };
   }
 
@@ -20,6 +21,7 @@ class App extends React.Component {
         this.setState({
           posts: posts.data,
           filteredPosts: posts.data,
+          isLoading: true,
         });
       }
     );
@@ -70,7 +72,17 @@ class App extends React.Component {
             />
           </div>
         </header>
-        <Card data={this.state.filteredPosts} setData={this.setData} />
+        {this.state.isLoading ? (
+          <Card data={this.state.filteredPosts} setData={this.setData} />
+        ) : (
+          <div className="loader__container">
+            <div className="loader">
+              <span></span>
+              <span></span>
+              <h3>Loading...</h3>
+            </div>
+          </div>
+        )}
       </div>
     );
   }
