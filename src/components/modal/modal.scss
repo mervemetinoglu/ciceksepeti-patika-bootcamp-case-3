@@ -20,6 +20,10 @@
   border-radius: 10px;
   overflow-x: hidden;
   transition: 200ms ease-in-out;
+
+  @media screen and (max-width: 480px) {
+    max-width: 100%;
+  }
 }
 
 .modal__header {
@@ -30,11 +34,7 @@
   justify-content: space-between;
 
   button {
-    border: 0;
-    outline: 0;
-    background: none;
     font-size: 1.5rem;
-    cursor: pointer;
   }
 }
 
@@ -48,15 +48,19 @@
 .modal__img {
   width: 250px;
   height: 22em;
-  box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px,
-    rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px,
-    rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+  box-shadow: rgba(0, 0, 0, 0.25) 0 54px 55px, rgba(0, 0, 0, 0.12) 0 -12px 30px,
+    rgba(0, 0, 0, 0.12) 0 4px 6px, rgba(0, 0, 0, 0.17) 0 12px 13px,
+    rgba(0, 0, 0, 0.09) 0 -3px 5px;
   border-radius: 5px;
 
   img {
     width: 100%;
     height: 100%;
     border-radius: 5px;
+  }
+
+  @media screen and (max-width: 480px) {
+    display: none;
   }
 }
 
@@ -65,8 +69,19 @@
   width: 320px;
   text-align: justify;
 
+  * {
+    display: block;
+    margin-bottom: 10px;
+  }
+
   span {
     font-weight: 600;
+  }
+
+  @media screen and (max-width: 480px) {
+    margin: 0;
+    width: 70%;
+    font-size: 0.9rem;
   }
 }
 
@@ -89,26 +104,35 @@
   }
 
   textarea {
-    outline: none;
-    border: none;
-    border-bottom: 2px solid black;
-    background: transparent;
     width: 96%;
     height: 7rem;
+    outline: none;
+    border: none;
+    background: transparent;
+    border-bottom: 2px solid black;
     text-align: justify;
   }
 
   .edit_buttons {
-    margin-top: 20px;
     float: right;
     margin-left: auto;
+    margin-top: 20px;
 
     button {
-      border: 0;
-      outline: 0;
-      background: none;
       font-size: 1.5rem;
-      cursor: pointer;
+    }
+  }
+
+  @media screen and (max-width: 480px) {
+    width: 300px;
+    margin-left: 0;
+
+    input {
+      padding: 0.5rem 0;
+    }
+
+    textarea {
+      width: 81%;
     }
   }
 }

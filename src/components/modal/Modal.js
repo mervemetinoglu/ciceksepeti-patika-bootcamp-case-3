@@ -1,14 +1,14 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import "./modal.scss";
 import { AiOutlineEdit, AiOutlineCheck } from "react-icons/ai";
 import { IoMdClose } from "react-icons/io";
 
-const Modal = ({ data, setData, setModalIsOpen, modalIsOpen, movies }) => {
-  const [movie, setMovie] = useState(movies);
+const Modal = ({ data, setData, setModalIsOpen, modalIsOpen, cardMovie }) => {
+  const [movieItem, setMovieItem] = useState(cardMovie);
   const [isEditing, setIsEditing] = useState(false);
-  const [title, setTitle] = useState(movie.title);
-  const [year, setYear] = useState(movie.year);
-  const [desc, setDesc] = useState(movie.desc);
+  const [title, setTitle] = useState(movieItem.title);
+  const [year, setYear] = useState(movieItem.year);
+  const [desc, setDesc] = useState(movieItem.desc);
 
   const handleEdit = (movie) => {
     const updated = [...data].map((item) => {
@@ -16,15 +16,13 @@ const Modal = ({ data, setData, setModalIsOpen, modalIsOpen, movies }) => {
         item.title = title.length > 0 ? title : movie.title;
         item.year = year.length > 0 ? year : movie.year;
         item.desc = desc.length > 0 ? desc : movie.desc;
-        setMovie(item);
+        setMovieItem(item);
       }
       return item;
     });
     setData(updated);
     setIsEditing(false);
   };
-
-
   return (
     <>
       {modalIsOpen && (
@@ -40,40 +38,39 @@ const Modal = ({ data, setData, setModalIsOpen, modalIsOpen, movies }) => {
             </div>
             <div className="modal__container">
               <div className="modal__img">
-                <img src={movie.image} alt="" />
+                <img src={movieItem.image} alt="" />
               </div>
               {isEditing ? (
                 <div className="modal__input">
-                  <form action="">
-                    <input
-                      type="text"
-                      defaultValue={movie.title}
-                      onChange={(e) => setTitle(e.target.value)}
-                    />
-                    <input
-                      type="text"
-                      defaultValue={movie.year}
-                      onChange={(e) => setYear(e.target.value)}
-                    />
-                    <textarea
-                      defaultValue={movie.desc}
-                      onChange={(e) => setDesc(e.target.value)}
-                    />
-                  </form>
+                  <input
+                    type="text"
+                    defaultValue={movieItem.title}
+                    onChange={(e) => setTitle(e.target.value)}
+                  />
+                  <input
+                    type="text"
+                    maxLength="4"
+                    defaultValue={movieItem.year}
+                    onChange={(e) => setYear(e.target.value)}
+                  />
+                  <textarea
+                    defaultValue={movieItem.desc}
+                    onChange={(e) => setDesc(e.target.value)}
+                  />
                   <div className="edit_buttons">
-                    <button onClick={() => handleEdit(movie)}>
-                      <AiOutlineCheck />
+                    <button >
+                      <AiOutlineCheck onClick={() => handleEdit(movieItem)}/>
                     </button>
-                    <button onClick={() => setIsEditing(false)}>
-                      <IoMdClose />
+                    <button >
+                      <IoMdClose onClick={() => setIsEditing(false)} />
                     </button>
                   </div>
                 </div>
               ) : (
                 <div className="modal__content">
-                  <h2>{movie.title}</h2>
-                  <span>{movie.year}</span>
-                  <p>{movie.desc}</p>
+                  <h2>{movieItem.title}</h2>
+                  <span>{movieItem.year}</span>
+                  <p>{movieItem.desc}</p>
                 </div>
               )}
             </div>
