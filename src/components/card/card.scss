@@ -3,8 +3,8 @@ $card-color: rgba(238, 238, 238, 0.822);
 .card {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(13rem, 1fr));
-  column-gap: 3rem;
-  row-gap: 3.5rem;
+  column-gap: 3.1rem;
+  row-gap: 3rem;
   margin: 3rem 0;
   padding: 0 2rem;
 }
@@ -12,14 +12,8 @@ $card-color: rgba(238, 238, 238, 0.822);
 .card__item {
   position: relative;
   height: 24em;
-  cursor: pointer;
-  transform: perspective(1000px) rotateY(10deg);
-  transition: 0.5s;
-  box-shadow: 7px 0 11px -4px rgba(0, 0, 0, 0.699);
-
-  &:hover {
-    transform: perspective(1000px) rotateY(0);
-  }
+  transform: perspective(800px) rotateY(11deg);
+  box-shadow: 8px 0 10px -6px rgba(0, 0, 0, 0.699);
 
   &:hover &-img {
     &::after {
@@ -38,7 +32,7 @@ $card-color: rgba(238, 238, 238, 0.822);
   height: 100%;
   position: absolute;
   overflow: hidden;
-  border-radius: 5px;
+  border-radius: 8px;
 
   img {
     width: 100%;
@@ -71,10 +65,10 @@ $card-color: rgba(238, 238, 238, 0.822);
   position: absolute;
   height: 7em;
   width: 13em;
-  bottom: 0;
-  left: -2em;
+  bottom: -1px;
+  left: -2.1em;
   padding: 0.2rem 0.7rem;
-  background-color: rgba(51, 51, 51, 0.979);
+  background-color: rgba(51, 51, 51, 0.993);
   border-top-right-radius: 10px;
   color: $card-color;
   overflow: hidden;
@@ -103,14 +97,12 @@ $card-color: rgba(238, 238, 238, 0.822);
     position: absolute;
     width: 2rem;
     height: 2rem;
-    border: none;
-    border-radius: 50%;
+    border-radius: 10px;
     background: $card-color;
     color: #000;
     transform: translate(-50%, -50%);
     transition: 0.25s cubic-bezier(0.25, 0, 0, 1);
-    cursor: pointer;
-
+    
     &:hover {
       background: #000;
       color: $card-color;
@@ -119,12 +111,12 @@ $card-color: rgba(238, 238, 238, 0.822);
     &:first-child:nth-last-child(2),
     &:first-child:nth-last-child(2) ~ * {
       &:nth-child(1) {
-        left: 37.5%;
-        top: 18.75%;
+        left: 23%;
+        top: 50%;
       }
       &:nth-child(2) {
-        left: 18.75%;
-        top: 37.5%;
+        left: 23%;
+        top: 75%;
       }
     }
   }

@@ -1,21 +1,21 @@
+import "./card.scss";
+import { BsTrash, BsThreeDots } from "react-icons/bs";
 import React, { useState } from "react";
 import Modal from "../modal/Modal";
 import RateStar from "../stars/RateStar";
-import "./card.scss";
-import { BsTrash, BsThreeDots } from "react-icons/bs";
 
 const Card = ({ data, setData }) => {
   const [modalIsOpen, setModalIsOpen] = useState(false);
-  const [movies, setMovies] = useState({});
+  const [movie, setMovie] = useState({});
 
   const deleteItem = (movieID) => {
     const newPosts = data.filter((item) => item.id !== movieID);
     setData(newPosts);
   };
 
-  const handleOpen = (movieItem) => {
+  const handleModelOpen = (movieItem) => {
     setModalIsOpen(true);
-    setMovies(movieItem);
+    setMovie(movieItem);
   };
 
   return (
@@ -26,7 +26,7 @@ const Card = ({ data, setData }) => {
             <button onClick={() => deleteItem(item.id)}>
               <BsTrash />
             </button>
-            <button onClick={() => handleOpen(item)}>
+            <button onClick={() => handleModelOpen(item)}>
               <BsThreeDots />
             </button>
           </div>
@@ -50,7 +50,7 @@ const Card = ({ data, setData }) => {
           setData={setData}
           setModalIsOpen={setModalIsOpen}
           modalIsOpen={modalIsOpen}
-          movies={movies}
+          cardMovie={movie}
         />
       )}
     </div>
