@@ -1,7 +1,7 @@
 import "./App.scss";
 import React from "react";
-import axios from "axios";
 import { AiOutlineSearch } from "react-icons/ai";
+import axios from "axios";
 import Card from "./components/card/Card";
 
 class App extends React.Component {
@@ -11,20 +11,21 @@ class App extends React.Component {
       posts: [],
       filteredPosts: [],
       inputValue: "",
-      isLoading: false,
+      isLoading: true,
     };
   }
 
+  // when the component is rendered get data
   componentDidMount() {
-    axios("https://615235804a5f22001701d687.mockapi.io/api/movies").then(
-      (posts) => {
+    axios("https://615235804a5f22001701d687.mockapi.io/api/movies")
+      .then((posts) => {
         this.setState({
           posts: posts.data,
           filteredPosts: posts.data,
-          isLoading: true,
+          isLoading: false,
         });
-      }
-    );
+      })
+      .catch((e) => console.log({ e }));
   }
 
   handleSearch = (e) => {
@@ -73,15 +74,15 @@ class App extends React.Component {
           </div>
         </header>
         {this.state.isLoading ? (
-          <Card data={this.state.filteredPosts} setData={this.setData} />
-        ) : (
           <div className="loader__container">
             <div className="loader">
               <span></span>
               <span></span>
-              <h3>Loading...</h3>
+              <h3>Wait, loading...</h3>
             </div>
           </div>
+        ) : (
+          <Card data={this.state.filteredPosts} setData={this.setData} />
         )}
       </div>
     );
