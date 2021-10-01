@@ -12,7 +12,7 @@ const Modal = ({ data, setModalIsOpen, cardMovie }) => {
 
   // edits movie info and updates cards
   const handleEdit = (movie) => {
-    const updated = [...data].map((item) => {
+     [...data].map((item) => {
       if (item.id === movie.id) {
         item.title = title.length > 0 ? title : movie.title;
         item.year = year.length > 0 ? year : movie.year;
@@ -21,6 +21,7 @@ const Modal = ({ data, setModalIsOpen, cardMovie }) => {
       }
       return item;
     });
+    
     setIsEditing(false);
   };
 

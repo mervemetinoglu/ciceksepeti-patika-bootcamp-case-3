@@ -97,7 +97,6 @@ class App extends React.Component {
         ) : (
           <Card
             data={this.state.filteredPosts}
-            setData={this.setData}
             deleteItem={this.deleteItem}
           />
         )}

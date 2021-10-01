@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import Modal from "../modal/Modal";
 import RateStar from "../stars/RateStar";
 
-const Card = ({ data, setData, deleteItem }) => {
+const Card = ({ data, deleteItem }) => {
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [movie, setMovie] = useState({});
 
