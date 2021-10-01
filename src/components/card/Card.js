@@ -1,18 +1,28 @@
 import "./card.scss";
 import { BsTrash, BsThreeDots } from "react-icons/bs";
 import React, { useState } from "react";
+import { ToastContainer, toast, Flip } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import Modal from "../modal/Modal";
 import RateStar from "../stars/RateStar";
+import { deleteMessages } from "./toastifyMessages";
 
 const Card = ({ data, setData }) => {
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [movie, setMovie] = useState({});
 
+  // deletes movie and updates data
   const deleteItem = (movieID) => {
     const newPosts = data.filter((item) => item.id !== movieID);
     setData(newPosts);
+
+    // displays toast message randomly
+    let random = Math.floor(Math.random() * 9);
+    toast(deleteMessages[random]);
   };
 
+  // when the dots buttons are clicked modalIsOpen is turned true
+  // and the selected movie is displayed
   const handleModelOpen = (movieItem) => {
     setModalIsOpen(true);
     setMovie(movieItem);
@@ -36,8 +46,9 @@ const Card = ({ data, setData }) => {
             </div>
             <div className="card__item-body">
               <h2>{item.title}</h2>
-              <span>{item.year} | </span>
-              <span>{item.director}</span>
+              <span>
+                {item.year} | {item.director}
+              </span>
               <RateStar />
             </div>
           </div>
@@ -49,10 +60,21 @@ const Card = ({ data, setData }) => {
           data={data}
           setData={setData}
           setModalIsOpen={setModalIsOpen}
-          modalIsOpen={modalIsOpen}
           cardMovie={movie}
         />
       )}
+
+      <ToastContainer
+        position="bottom-right"
+        autoClose={5000}
+        hideProgressBar
+        newestOnTop
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        transition={Flip}
+        theme="dark"
+      />
     </div>
   );
 };
