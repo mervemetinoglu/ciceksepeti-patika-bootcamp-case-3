@@ -2,7 +2,10 @@ import "./App.scss";
 import React from "react";
 import { AiOutlineSearch } from "react-icons/ai";
 import axios from "axios";
+import { ToastContainer, toast, Flip } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import Card from "./components/card/Card";
+import { deleteMessages } from "./toastifyMessages";
 
 class App extends React.Component {
   constructor() {
@@ -37,7 +40,7 @@ class App extends React.Component {
 
     this.setState({
       inputValue: e.target.value,
-      filteredPosts,
+      filteredPosts: filteredPosts,
     });
   };
 
@@ -46,6 +49,16 @@ class App extends React.Component {
       filteredPosts: data,
       posts: data,
     });
+  };
+
+  // deletes movie and updates data
+  deleteItem = (movieID) => {
+    const newPosts = this.state.posts.filter((item) => item.id !== movieID);
+    this.setData(newPosts);
+
+    // displays toast message randomly
+    let random = Math.floor(Math.random() * 9);
+    toast(deleteMessages[random]);
   };
 
   render() {
@@ -82,8 +95,23 @@ class App extends React.Component {
             </div>
           </div>
         ) : (
-          <Card data={this.state.filteredPosts} setData={this.setData} />
+          <Card
+            data={this.state.filteredPosts}
+            setData={this.setData}
+            deleteItem={this.deleteItem}
+          />
         )}
+        <ToastContainer
+          position="bottom-right"
+          autoClose={5000}
+          hideProgressBar
+          newestOnTop
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          transition={Flip}
+          theme="dark"
+        />
       </div>
     );
   }
