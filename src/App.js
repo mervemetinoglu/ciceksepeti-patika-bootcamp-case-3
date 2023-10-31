@@ -19,17 +19,26 @@ class App extends React.Component {
   }
 
   // when the component is rendered get data
-  componentDidMount() {
-    axios("https://615235804a5f22001701d687.mockapi.io/api/movies")
-      .then((posts) => {
-        this.setState({
-          posts: posts.data,
-          filteredPosts: posts.data,
-          isLoading: false,
-        });
-      })
-      .catch((e) => console.log({ e }));
-  }
+componentDidMount() {
+  axios("https://615235804a5f22001701d687.mockapi.io/api/movies")
+    .then((response) => {
+      // HTTP isteği başarılı oldu
+      this.setState({
+        posts: response.data,
+        filteredPosts: response.data,
+        isLoading: false,
+      });
+    })
+    .catch((error) => {
+      // HTTP isteği hata verdi
+      console.error("Hata oluştu: ", error);
+      this.setState({
+        isLoading: false,
+      });
+      // Hata durumunu kullanıcıya bildirebilirsiniz, örneğin toast ile
+      toast.error("Veri alınamadı. Lütfen tekrar deneyin.");
+    });
+}
 
   handleSearch = (e) => {
     const filteredPosts = this.state.posts.filter(
